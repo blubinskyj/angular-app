@@ -7,7 +7,15 @@ const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
 const cors = require('cors');
 const morgan = require('morgan');
+const mongoose = require("mongoose");
+const keys = require('./config/keys')
 const app = express();
+
+mongoose.connect(keys.mongoURI)
+    .then(()=>{
+        console.log('MongoDb connected')
+    })
+    .catch(error => console.log(error))
 
 app.use(morgan('dev'));
 app.use(cors());
